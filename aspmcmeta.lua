@@ -60,7 +60,8 @@ dlg:button{ id="export",
                 if path:sub(#path, #path) ~= "/" then
                     path = path.."/"
                 end
-                local fullPath = path..dlg.data.name:gsub("%.png", "")..".png"
+                local name = dlg.data.name:gsub("%.png", "")..".png"
+                local fullPath = path..name
 
                 -- export the animation
                 Export(fullPath)
@@ -74,6 +75,8 @@ dlg:button{ id="export",
                 else 
                     print(fullPath.." is not a valid place to write the file to. do the directories exist?")
                 end
+
+                print("exported the files "..name.." and "..name..".mcmeta to "..path)
 
                 mcmetafile:close()
             end 
