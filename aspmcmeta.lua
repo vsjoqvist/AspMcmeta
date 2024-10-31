@@ -1,3 +1,8 @@
+function SplitFilename(strFilename)
+    -- Returns the Path, Filename, and Extension as 3 values
+    return string.match(strFilename, "(.-)([^\\]-([^\\%.]+))$")
+end
+
 function GetFrames()
     local frame = app.activeFrame
 
@@ -31,7 +36,11 @@ Frames = GetFrames()
 
 local dlg = Dialog { title = "Export settings" }
 
-local path = dlg.data.path
+local path = ""
+local filename = ""
+local file_extension = ""
+
+path, filename, file_extension  = SplitFilename(app.editor.sprite.filename)
 
 if path == nil then
     path = ""
@@ -39,7 +48,7 @@ end
 
 dlg:entry{ id="name",
            label="texture name",
-           text="",
+           text=filename,
            focus=true,
 }
 
